@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from django.contrib import messages
-from .models import Room, Reservation
+from .models import Room, Reservation, Contact
 from .forms import ReservationForm, RoomForm, SignUpForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
@@ -9,7 +9,12 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
 from django.contrib.auth import logout
 from django.contrib.messages import add_message
+from django.middleware.csrf import get_token
+
+
 SUCCESS = 25
+
+
 @login_required
 def index(request):
     return render(request, 'index.html')
@@ -18,7 +23,10 @@ def about(request):
     return render(request, 'about.html')
 
 def contact(request):
-    return render(request, 'contact.html')
+    context = {
+        'csrf_token': get_token(request)
+    }
+    return render(request, 'contact.html',context=context)
 
 def home(request):
     rooms = Room.objects.all()
@@ -30,33 +38,7 @@ class ReservationView(LoginRequiredMixin, View):
         form = ReservationForm()
         return render(request, 'reservation.html', {'room': room, 'form': form})
 
-    def post(self, request, room_id):
-        room = get_object_or_404(Room, pk=room_id)
-        form = ReservationForm(request.POST)
-        # if form.is_valid():
-        #     reservation = form.save(commit=False)
-        #     reservation.room = room
-        #     reservation.save()
-        #     messages.success(request, 'Votre réservation a été enregistrée.')
-        #     return redirect('reservation_confirmation', reservation_id=reservation.id)
-        if request.method == 'POST':
-            guest_name = request.POST.get('guest_name')
-            guest_email = request.POST.get('guest_email')
-            check_in = request.POST.get('check_in')
-            check_out = request.POST.get('check_out')
-        
-            reservation = Reservation.objects.create(
-            guest_name = guest_name,
-            guest_email = guest_email,
-            check_in = check_in,
-            check_out = check_out,
-            )
-            reservation.save()
-            add_message(request, SUCCESS, " The reservations  has been sent")
-            return render(request, 'home.html')
-        else:
-            messages.error(request, 'Veuillez corriger les erreurs ci-dessous.')
-        return render(request, 'reservation.html', {'room': room, 'form': form})
+    
 
 def reservation_confirmation(request, reservation_id):
     reservation = get_object_or_404(Reservation, pk=reservation_id)
@@ -112,3 +94,50 @@ def custom_logout(request):
     return redirect('logout_success')
 def logout_success(request):
     return render(request, 'logout_success.html')
+
+
+
+
+def send_reserve(request, room_id):
+    room = Room.objects.get(id=room_id)
+    if request.method == 'POST':
+        guest_name = request.POST.get('guest_name')
+        guest_email = request.POST.get('guest_email')
+        check_in = request.POST.get('check_in')
+        check_out = request.POST.get('check_out')
+
+        reservation = Reservation.objects.create(
+        room = room,
+        guest_name = guest_name,
+        guest_email = guest_email,
+        check_in = check_in,
+        check_out = check_out,
+        )
+        reservation.save()
+
+        add_message(request, SUCCESS, " The reservation has been sent")
+        return render(request, 'reservation_confirmation.html',{'reservation':reservation})
+    
+
+
+def contact_us(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        phone = request.POST.get('phone')
+        company = request.POST.get('company')
+        subject = request.POST.get('subject')
+        question = request.POST.get('question')
+
+        contact=Contact.objects.create(
+            name=name,
+            email=email,
+            phone = phone,
+            company = company,
+            subject =subject,
+            question =question
+        )
+        contact.save()
+
+        add_message(request, SUCCESS, " The message has been sent")
+        return render(request, 'contact.html')

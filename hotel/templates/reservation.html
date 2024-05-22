@@ -11,7 +11,7 @@
     </div>
     <div class="col-md-6 p-4">
       <h2>Formulaire de réservation</h2>
-     <form method="post" action="{% url 'reservation_confirmation' room.id %}">
+     <form method="post" action="{% url 'send_reserve' room.id %}">
 
         {% csrf_token %}
         <div class="form-group">

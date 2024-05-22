@@ -26,9 +26,12 @@
       a {
         text-decoration: none;
         color: inherit;
-
         font-size: large;
       }
+      .nav-link:hover {
+       
+       color: #d2a679;
+     }
 
       .dropdown-menu {
         background-color: #fff;
@@ -39,6 +42,7 @@
         background-color: white;
         color: #a07e5b;
       }
+     
     .custom-navbar {
     background-color:  #c29e79;
      }
@@ -87,15 +91,15 @@
             </li>
           </ul>
           <nav>
-            <ul>
+            <div class="d-flex flex-row" >
     
                 {% if user.is_authenticated %}
-                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                    <a class="nav-link custom-nav-link"    href="{% url 'logout' %}">Logout</a>
                 {% else %}
-                    <li><a href="{% url 'login' %}">Login</a></li>
-                    <li><a href="{% url 'signup' %}">Sign Up</a></li>
+                    <a class="nav-link custom-nav-link"  href="{% url 'login' %}">Login</a>
+                    <a class="nav-link custom-nav-link"  href="{% url 'signup' %}">Sign Up</a>
                 {% endif %}
-            </ul>
+            </div>
         </nav>
         </div>
       </div>

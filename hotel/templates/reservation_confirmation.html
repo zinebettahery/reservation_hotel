@@ -1,14 +1,23 @@
-{% extends 'index.html' %}
-{% block content %}
+{% extends 'index.html' %} {% block content %}
+
 <div class="container">
-    <h2>Confirmation de Réservation</h2>
-    <p>Merci {{ reservation.guest_name }} pour votre réservation.</p>
-    <p>Détails de la réservation :</p>
-    <ul>
-        <li>Chambre: {{ reservation.room.name }}</li>
-        <li>Date d'arrivée: {{ reservation.check_in }}</li>
-        <li>Date de départ: {{ reservation.check_out }}</li>
-        <li>Email: {{ reservation.guest_email }}</li>
-    </ul>
+  {% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+    <div {% if message.tags %} class="{{ message.tags }}" {% endif %}>
+      <div class="alert alert-success m-2" role="alert">{{ message }}</div>
+    </div>
+    {% endfor %}
+  </ul>
+  {% endif %}
+  <h2>Confirmation de Réservation</h2>
+  <p>Merci {{ reservation.guest_name }} pour votre réservation.</p>
+  <p>Détails de la réservation :</p>
+  <ul>
+    <li>Chambre: {{ reservation.room.name }}</li>
+    <li>Date d'arrivée: {{ reservation.check_in }}</li>
+    <li>Date de départ: {{ reservation.check_out }}</li>
+    <li>Email: {{ reservation.guest_email }}</li>
+  </ul>
 </div>
 {% endblock %}
