@@ -1,0 +1,64 @@
+{% extends 'index.html' %}
+{% block content %}
+{% load static %}
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-6">
+            <h1 class="display-4">LuxeStay A Luxury Hotel</h1>
+            <p>
+                LuxeStay est bien plus qu'un simple hôtel. Fondé en 2020 par HAFSA, RIM et SAMIA notre établissement incarne le luxe, le confort et l'hospitalité depuis des décennies. Notre engagement envers nos clients et notre passion pour le voyage sont au cœur de tout ce que nous faisons.
+            </p>
+            <p>
+                Nous nous engageons à offrir à nos clients une expérience exceptionnelle à chaque séjour. Que ce soit pour une escapade romantique, des vacances en famille ou un voyage d'affaires, LuxeStay est l'endroit idéal pour se détendre et se ressourcer.
+            </p>
+            <p>
+                Notre équipe dévouée est là pour répondre à tous vos besoins et vous offrir un service personnalisé à tout moment. Venez découvrir l'excellence de LuxeStay et laissez-nous rendre votre séjour inoubliable.
+            </p>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-6">
+                    <img src="{% static 'img/image4.jpg' %}" alt="Image 1" class="img-fluid">
+                </div>
+                <div class="col-md-6">
+                    <img src="{% static 'img/image5.jpg' %}" alt="Image 2" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row mt-5">
+        <div class="col-md-6">
+            <img src="{% static 'img/gym.jpg' %}" alt="Gymnasium" class="img-fluid">
+            <h2>GYMNASIUM</h2>
+            <p>
+                We have the most equipped gymnasium in the country with an instructor always available.
+            </p>
+        </div>
+        <div class="col-md-6">
+            <img src="{% static 'img/spa.jpg' %}" alt="Helipad" class="img-fluid">
+            <h2>SPA</h2>
+            <p>
+                Indulge in a rejuvenating experience at our world-class spa, offering a range of treatments designed to relax and revitalize.
+            </p>
+        </div>
+    </div>
+    
+    <div class="row mt-5">
+        <div class="col-md-6">
+            <img src="{% static 'img/dinning.jpg' %}" alt="Dining" class="img-fluid">
+            <h2>DINING</h2>
+            <p>
+                Experience exquisite dining with a variety of culinary delights prepared by world-renowned chefs.
+            </p>
+        </div>
+        <div class="col-md-6">
+            <img src="{% static 'img/pool.jpg' %}" alt="Pool" class="img-fluid">
+            <h2>POOL</h2>
+            <p>
+                Relax and unwind by our luxurious pool with a stunning view, perfect for a refreshing dip.
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

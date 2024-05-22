@@ -1,0 +1,41 @@
+{% extends 'index.html' %}
+{% block content %}
+<div class="container my-5">
+  <div class="row">
+    <div class="col-md-6 p-4">
+      <h2 class="display-4">{{ room.name }}</h2>
+      <img src="{{ room.image.url }}" class="img-fluid" alt="{{ room.name }}">
+    
+      <p class="pr-4">{{ room.description }}</p>
+      <h6>{{ room.price_per_night }} $/nuit</h6>
+    </div>
+    <div class="col-md-6 p-4">
+      <h2>Formulaire de réservation</h2>
+     <form method="post" action="{% url 'reservation_confirmation' room.id %}">
+
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="guest_name">Nom:</label>
+          <input type="text" class="form-control" id="guest_name" name="guest_name" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" class="form-control" id="guest_email" name="guest_email" required>
+        </div>
+        <div class="form-group">
+          <label for="check_in">Date d'arrivée:</label>
+          <input type="date" class="form-control" id="check_in" name="check_in" required>
+        </div>
+        <div class="form-group">
+          <label for="check_out">Date de départ:</label>
+          <input type="date" class="form-control" id="check_out" name="check_out" required>
+        </div>
+        <div class="form-group">
+          <input type="hidden" name="room_id" value="{{ room.id }}">
+        </div>
+        <button type="submit" class="btn btn-primary">Réserver</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

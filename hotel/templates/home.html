@@ -1,0 +1,67 @@
+{% extends 'index.html' %}
+{% block content %}
+{% load static %}
+
+<div class="row justify-content-center py-5">
+  
+<div class="container my-5">
+  <div class="row">
+    <div class="col-md-6">
+      <h1 class="display-4">LuxeStay A Luxury Hotel</h1>
+      <p>
+        LuxeStay is a leading online accommodation site. We’re passionate about travel.
+        Every day, we inspire and reach millions of travelers across 90 local websites
+        in 41 languages.
+      </p>
+      <p>
+        So when it comes to booking the perfect hotel, vacation rental, resort, apartment,
+        guest house, or tree house, we’ve got you covered.
+      </p>
+    
+    <p>
+      We are committed to providing our guests with an exceptional experience every stay. Whether for a romantic getaway, family vacation or business trip, LuxeStay is the perfect place to relax and recharge.
+    </p>
+   
+      <br>
+      <a href="about/" class="btn btn-link" style="text-decoration: none; color: #070707; font-weight: bold;">
+        Read More
+      </a>
+    </div>
+    <div class="col-md-6">
+      <div class="row">
+        <div class="col-md-6">
+          <img src="{% static 'img/image4.jpg' %}" alt="Image 1" class="img-fluid">
+        </div>
+        <div class="col-md-6">
+          <img src="{% static 'img/image5.jpg' %}" alt="Image 2" class="img-fluid">
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <main class="container my-5">
+    <section class="row">
+      <div class="col-12">
+        <h2 class="text-center" style="font-weight: bold;">Chambres et suites</h2>
+      </div>
+    </section>
+    <section class="row">
+      {% for room in rooms %}
+      <div class="col-md-4">
+        <div class="card mb-3">
+          <img src="{{ room.image.url }}" style="height: 200px;" class="card-img-top" alt="{{ room.name }}">
+          <div class="card-body">
+            <h5 class="card-title">{{ room.name }}</h5>
+            <p class="card-text p-4">{{ room.description }}</p>
+            <h6 class="card-title">{{ room.price_per_night }} $/nuit</h6>
+            <a href="{% url 'reservation' room.id %}?next={{ request.path }}" class="btn btn-primary">Réserver</a>
+
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </section>
+  </main>
+</div>
+</div>
+{% endblock %}

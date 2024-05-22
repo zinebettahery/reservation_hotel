@@ -1,4 +1,4 @@
-
+{%load static%}
 <!DOCTYPE html>
 <html>
   <head>
@@ -20,7 +20,7 @@
       }
 
       .btn {
-        background-color: #5300b3;
+        background-color:#d2a679;
         color: white;
       }
       a {
@@ -37,15 +37,23 @@
 
       .btn:hover {
         background-color: white;
-        color: #5300b3;
+        color: #a07e5b;
       }
-      .navbar {
-        z-index: 1;
-        position: fixed;
-        top: 0;
-        width: 100%;
-      }
+    .custom-navbar {
+    background-color:  #c29e79;
+     }
+     .custom-nav-link {
+    color: #3c2106;
+}
 
+      .navbar {
+        
+    
+            
+            top: 0;
+            width: 100%;
+            background-color:  #a07e5b; /* Background color for the navbar */
+        }
       .hero {
         z-index: 0;
       }
@@ -58,139 +66,52 @@
   </head>
 
   <body>
-    <nav
-      class="navbar navbar-expand-lg navbar-dark p-2"
-      style="background-color: #5300b3"
-    >
-      <div class="container">
-        <a class="navbar-brand" href="#"
-          ><img src="../static/ISMAELAND.png" width="20" height="20"
-        /></a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
+   <div>
+    <nav class="navbar navbar-expand-lg  custom-navbar">
+
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/home/">
-                home</a
-              >
+              <a class="nav-link active custom-nav-link " aria-current="page" href="/">HOME</a>
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link custom-nav-link" href="/about">ABOUT US </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/contactus/">
-                Contactez_nous</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/blog/"> Blog</a>
+              <a  class="nav-link custom-nav-link" href="/contact">CONTATCT</a>
             </li>
           </ul>
-          <form class="d-flex" action="" method="post">
-        
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item dropdown">
-                <a
-                  class="nav-link dropdown-toggle text-white"
-                  href="#"
-                  id="navbarScrollingDropdown"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  
-                  <img
-                    src="../static/fr.png"
-                    class="rounded-circle"
-                    alt="flag"
-                    width="20px"
-                    height="20px"
-                  />
-               
-                  <img
-                    src=""
-                    class="rounded-circle"
-                    alt="flag"
-                    width="20px"
-                    height="20px"
-                  />
-                 
-                </a>
-                <ul
-                  class="dropdown-menu"
-                  aria-labelledby="navbarScrollingDropdown"
-                >
-                  <li>
-                    <button
-                      type="submit"
-                      name="language"
-                      value="en"
-                      class="dropdown-item"
-                    >
-                      <img
-                        src=""
-                        alt="flag"
-                        class="rounded-circle"
-                        width="20px"
-                        height="20px"
-                      />
-                      English
-                    </button>
-                  </li>
-                  <li><hr class="dropdown-divider" /></li>
-                  <li>
-                    <button
-                      type="submit"
-                      name="language"
-                      value="fr"
-                      class="dropdown-item"
-                    >
-                      <img
-                        src="../static/fr.png"
-                        class="rounded-circle"
-                        alt="flag"
-                        width="20px"
-                        height="20px"
-                      />
-                      Français
-                    </button>
-                  </li>
-                </ul>
-              </li>
+          <nav>
+            <ul>
+    
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                {% else %}
+                    <li><a href="{% url 'login' %}">Login</a></li>
+                    <li><a href="{% url 'signup' %}">Sign Up</a></li>
+                {% endif %}
             </ul>
-          </form>
-
-        
-         
-       
-          <a href="/se_connecter/">
-            <button class="btn btn-outline-light" type="submit">
-               se_connecter
-            </button>
-          </a>
-       
-        
+        </nav>
         </div>
       </div>
     </nav>
+  </div>       
     <div class="container hero py-5">{% block content %} {% endblock %}</div>
 
-    <footer class="footer text-white" style="background-color: #111827">
+    <footer class="footer text-white" style="background-color: #a07e5b">
       <div class="container p-4">
         <div class="row py-3 justify-content-between p-4">
           <div class="col-lg-2">
-            <h5>Ismaeland</h5>
-            <p><a href="/contactus"> Contactez </a></p>
+            <h5>LuxeStay</h5>
+            <p><a href="/contact"> Contact </a></p>
           </div>
           <div class="col-lg-4">
-            <h5>propos_nous</h5>
+            <h5>A propos de nous </h5>
             <p>
              Nous sommes une équipe de passionnés dont l objectif est d améliorer la vie
             </p>
@@ -210,7 +131,7 @@
                   d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414zM0 4.697v7.104l5.803-3.558zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586zm3.436-.586L16 11.801V4.697z"
                 />
               </svg>
-              E-mail: contact@ismaeland.com
+              E-mail: LuxeStay@gmail.com
             </p>
             <p>
               <svg

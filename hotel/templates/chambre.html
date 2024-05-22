@@ -1,0 +1,26 @@
+{% extends 'index.html' %}
+{% block content %} 
+<main class="container my-5">
+    <section class="row">
+      <div class="col-12">
+        <h2 class="text-center" style="font-weight: bold;">Chambres et suites</h2>
+      </div>
+    </section>
+    <section class="row">
+      {% for room in rooms %}
+      <div class="col-md-4">
+        <div class="card mb-3">
+          <img src="{{ room.image.url }}" class="card-img-top" alt="{{ room.name }}">
+          <div class="card-body">
+            <h5 class="card-title">{{ room.name }}</h5>
+            <p class="card-text">{{ room.description }}</p>
+            <h6 class="card-title">{{ room.price_per_night }} $/nuit</h6>
+            <a href="{% url 'reservation' room.id %}?next={{ request.path }}" class="btn btn-primary">Réserver</a>
+
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </section>
+  </main>
+  {% endblock %}
