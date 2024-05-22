@@ -24,3 +24,12 @@ class Reservation(models.Model):
 
     def __str__(self):
         return f'Reservation for {self.guest_name} in {self.room.name}'
+
+
+class Contact(models.Model):
+    name = models.CharField(max_length=50)
+    email = models.EmailField(max_length=150)
+    phone = models.IntegerField( null=True, blank=True)
+    company = models.CharField(max_length=200, null=True, blank=True)
+    subject = models.CharField(max_length=200)
+    question = models.TextField(max_length=255)

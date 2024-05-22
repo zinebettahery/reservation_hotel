@@ -1,5 +1,14 @@
 {% extends 'index.html' %}
 {% block content %} 
+{% if messages %}
+<ul class="messages">
+  {% for message in messages %}
+  <div {% if message.tags %} class="{{ message.tags }}" {% endif %}>
+    <div class="alert alert-success m-2" role="alert">{{ message }}</div>
+  </div>
+  {% endfor %}
+</ul>
+{% endif %}
 
 <div class="row justify-content-center py-5">
   <div class="row">
@@ -8,7 +17,8 @@
         <h3 class="mb-4">Contactez</h3>
         <p>Contactez-nous pour tout ce qui concerne notre entreprise ou nos services.</p>
 
-        <form action="" method="post" class="">
+        <form action="{% url 'contact_us' %}" method="post" class="">
+          {% csrf_token %}
           <div class="row">
             <div class="col-md-12 p-2">
               <div class="form-group">
@@ -115,7 +125,7 @@
       </div>
     </div>
 
-    <div class="col-md-5 d-flex bg-light">
+    <div class="col-md-5 d-flex " style="background-image: url('static/img/image4.jpg')">
       <div class="w-80 p-md-5 px-2">
         <h3 class="mb-4 mt-md-4 p-2">LuxeStay</h3>
 
