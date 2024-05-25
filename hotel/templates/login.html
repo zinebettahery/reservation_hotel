@@ -1,6 +1,7 @@
 {% extends 'index.html' %}
 {%load static %}
 {% block content %}
+<<<<<<< HEAD
 <div class="container d-flex justify-content-center align-items-center min-vh-100">
     <div class="col-md-8 col-lg-7">
         <div class="p-5 bg-white shadow-sm rounded">
@@ -15,6 +16,16 @@
             </form>
         </div>
     </div>
+=======
+<div class="container p-5">
+    <h2>Connexion</h2>
+    <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="hidden" name="next" value="{{ next }}">
+        <button type="submit" class="btn btn-primary">Se connecter</button>
+    </form>
+>>>>>>> 123ad510119f89a73a4b84e4d3bb7910f2a7bf45
 </div>
 
 <style>
