@@ -1,8 +1,8 @@
-{% extends 'index.html' %} {% block content %}
-
-<div class="container">
+{% extends 'index.html' %}
+{% block content %}
+<div class="container mt-5">
   {% if messages %}
-  <ul class="messages">
+  <ul class="messages list-unstyled">
     {% for message in messages %}
     <div {% if message.tags %} class="{{ message.tags }}" {% endif %}>
       <div class="alert alert-success m-2" role="alert">{{ message }}</div>
@@ -10,14 +10,44 @@
     {% endfor %}
   </ul>
   {% endif %}
-  <h2>Confirmation de Réservation</h2>
-  <p>Merci {{ reservation.guest_name }} pour votre réservation.</p>
-  <p>Détails de la réservation :</p>
-  <ul>
-    <li>Chambre: {{ reservation.room.name }}</li>
-    <li>Date d'arrivée: {{ reservation.check_in }}</li>
-    <li>Date de départ: {{ reservation.check_out }}</li>
-    <li>Email: {{ reservation.guest_email }}</li>
-  </ul>
+  
+  <div class="card p-4 shadow-sm">
+    <div class="card-body">
+      <h2 class="card-title text-center mb-4" style="font-weight: bold;">FACTURE </h2>
+      <p class="card-text">Merci <strong>{{ reservation.guest_name }}</strong> pour votre réservation.</p>
+      <p class="card-text">Détails de la réservation :</p>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item"><strong>Chambre:</strong> {{ reservation.room.name }}</li>
+        <li class="list-group-item"><strong>Date d'arrivée:</strong> {{ reservation.check_in }}</li>
+        <li class="list-group-item"><strong>Date de départ:</strong> {{ reservation.check_out }}</li>
+        <li class="list-group-item"><strong>Email:</strong> {{ reservation.guest_email }}</li>
+        <li class="list-group-item"><strong>Nombre d'adultes:</strong> {{ reservation.nombreAdult }}</li>
+        <li class="list-group-item"><strong>Nombre d'enfants:</strong> {{ reservation.nombreEnfant }}</li>
+        <li class="list-group-item"><strong>Numéro de téléphone:</strong> {{ reservation.telephone }}</li>
+      </ul>
+      <button id="download-btn" class="btn btn-primary mt-4">Télécharger la facture</button>
+    </div>
+  </div>
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+<script>
+  document.getElementById('download-btn').addEventListener('click', function () {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    doc.text("Confirmation de Réservation", 10, 10);
+    doc.text(`Merci ${document.querySelector('.card-text strong').innerText} pour votre réservation.`, 10, 20);
+    doc.text("Détails de la réservation :", 10, 30);
+
+    const items = document.querySelectorAll('.list-group-item');
+    let yOffset = 40;
+    items.forEach(item => {
+      doc.text(item.innerText, 10, yOffset);
+      yOffset += 10;
+    });
+
+    doc.save('facture.pdf');
+  });
+</script>
 {% endblock %}

@@ -105,13 +105,18 @@ def send_reserve(request, room_id):
         guest_email = request.POST.get('guest_email')
         check_in = request.POST.get('check_in')
         check_out = request.POST.get('check_out')
-
+        nombreAdult = request.POST.get('nombreAdult')
+        nombreEnfant = request.POST.get('nombreEnfant')
+        telephone = request.POST.get('telephone')
         reservation = Reservation.objects.create(
         room = room,
         guest_name = guest_name,
         guest_email = guest_email,
         check_in = check_in,
         check_out = check_out,
+        nombreAdult =nombreAdult,
+        nombreEnfant = nombreEnfant,
+        telephone = telephone,
         )
         reservation.save()
 
